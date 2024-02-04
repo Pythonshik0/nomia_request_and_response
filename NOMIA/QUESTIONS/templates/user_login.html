@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <form class="login-form" method="post" action="{% url 'user_login' %}">
+      {% csrf_token %}
+      <h2 class="input-h2">Войти</h2>
+       {{ form.as_p }}
+      {{ form.errors }}
+      <button type="submit">Войти</button>
+    </form>
+</div>
+{% endblock %}

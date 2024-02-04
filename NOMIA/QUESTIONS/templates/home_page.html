@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<div id="header">
+    <div class="The_main_menu_is_on_top">
+    {% if user.is_authenticated %}
+        {% for survey in surveys %}
+            {% for survey in surveys %}
+                <a class="button_task" href="{% url 'survey' survey.title 2 %}">
+                    <div class="survey">{{ survey.title }}</div>
+                </a>
+            {% endfor %}
+        {% endfor%}
+        <div class="user_count_response">
+            {{ total_participants }}
+        </div>
+        <div class="user_count_response">
+            {{ formatted_results }}
+        </div>
+    {% else %}
+        <div class="Separation_of_input_and_output">
+            <a class="create_akk" href="/register">
+              <h1 class="create_akk_text">СОЗДАТЬ АККАУНТ</h1></a>
+            <a class="add_tasks" href="/user_login">
+              <h1 class="add_task_text">ВОЙТИ В АККАУНТ</h1></a>
+        </div>
+    {% endif %}
+    </div>
+</div>
+{% endblock%}

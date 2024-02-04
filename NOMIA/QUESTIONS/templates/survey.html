@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Опрос{% endblock %}
+
+{% block content %}
+<div class="main_survey_container">
+    <div class="questions_for_user_verification">
+        <form method="post">
+            {% csrf_token %}
+            <h1>{{ selected_survey.title }}</h1>
+            <ul>
+                <li>{{ question.text }}</li>
+                {% for qc in question_choice %}
+                <li>
+                    <input type="radio" id="choice_{{ qc.choice.id }}" name="answer_{{ question.id }}" value="{{ qc.choice.id }}">
+                    <label for="choice_{{ qc.choice.id }}">{{ qc.choice.text }}</label>
+                </li>
+                {% endfor %}
+            </ul>
+            {% if question_number >= 7 %}
+                <button type="submit">Завершить</button>
+            {% else %}
+                <button type="submit">Далее</button>
+            {% endif %}
+            <a class="button_task" href="{% url 'home_page' %}">
+                Выйти из опроса
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock%}
